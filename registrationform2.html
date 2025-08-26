@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Page</title>
+  <style>
+    body {
+      background-color: yellow;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: yellow;
+      padding: 20px 40px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 10px 15px;
+      align-items: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 200px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .radio {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btns {
+      grid-column: span 2;
+      text-align: center;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+      padding: 5px 15px;
+      margin: 5px;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 15px;
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>Registration Page</h1>
+    <form id="regForm">
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="fname" required>
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lname" required>
+
+      <label for="dob">Date Of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label>Gender</label>
+      <div class="radio">
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+      </div>
+
+      <label for="phone">Phone No</label>
+      <input type="text" id="phone" name="phone" required pattern="\d{10}" title="Enter 10-digit phone number">
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="2" cols="20" required></textarea>
+
+      <div class="checkbox full-width">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">Accept terms and conditions</label>
+      </div>
+
+      <label for="branch">Branch</label>
+      <select id="branch" name="branch">
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="MECH">MECH</option>
+        <option value="EEE">EEE</option>
+      </select>
+
+      <div class="btns">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+      </div>
+
+      <div class="success-msg" id="successmsg">
+        Thank You For Registering :)
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('regForm');
+    const successMsg = document.getElementById('successmsg');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Stop default submission
+      successMsg.style.display = 'block'; // Show success message
+      form.reset(); // Optional: reset the form
+    });
+  </script>
+
+</body>
+</html>
