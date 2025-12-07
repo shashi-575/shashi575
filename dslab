@@ -1,0 +1,781 @@
+
+1)#a
+# Vector examples (similar to Program 1)
+numbers <- c(10, 20, 30, 40)
+print(numbers)
+fruits <- c("apple", "banana", "mango")
+print(fruits)
+# List example (taken from Program 1 style)
+mylist <- list("apple", 25, TRUE, c(1, 2, 3))
+print(mylist)
+#b
+# Vectors
+v1 <- c(5, 10, 15)
+v2 <- c(2, 4, 6)
+# Summation
+v_add <- v1 + v2
+print(v_add)
+# Subtraction
+v_sub <- v1 - v2
+print(v_sub)
+# Multiplication
+v_mul <- v1 * v2
+print(v_mul)
+# Division
+v_div <- v1 / v2
+print(v_div)
+# List example (operation on list elements only)
+num_list <- list(a = 10, b = 20, c = 30)
+# Element-wise operations
+sum_list <- num_list$a + num_list$b
+print(sum_list)
+sub_list <- num_list$c - num_list$a
+print(sub_list)
+mul_list <- num_list$b * num_list$c
+print(mul_list)
+div_list <- num_list$c / num_list$b
+print(div_list)
+
+#c
+# Load iris dataset
+data(iris)
+# Select only numeric columns
+num_data <- iris[, 1:4]
+# Find correlation matrix
+cor_matrix <- cor(num_data)
+# Plot correlation matrix
+library(corrplot)
+corrplot(cor_matrix,
+         method = "color",
+         addCoef.col = "black",
+         tl.col = "black",
+         number.cex = 0.7)
+
+2)#a
+# Create a matrix (same style as Program 1)
+mat <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2)
+print(mat)
+# Matrix subsetting (same as Program 1)
+mat[1, 2]        # element in row 1 column 2
+mat[2, ]         # entire row 2
+mat[, 1]         # entire column 1
+mat[c(1,3), ]    # rows 1 and 3
+mat[, c(1,2)]    # columns 1 and 2
+#b
+# Two matrices for operations
+m1 <- matrix(c(1, 2, 3, 4), nrow = 2)
+m2 <- matrix(c(5, 6, 7, 8), nrow = 2)
+# Addition
+m_add <- m1 + m2
+print(m_add)
+# Subtraction
+m_sub <- m1 - m2
+print(m_sub)
+# Adding rows (rbind)
+m_row_added <- rbind(m1, c(10, 20))
+print(m_row_added)
+# Adding columns (cbind)
+m_col_added <- cbind(m1, c(100, 200))
+print(m_col_added)
+#c
+# Given data
+x <- c(2, 4, 5, 6, 8)
+y <- c(60, 75, 80, 85, 95)
+# Step 1: Means
+mean_x <- mean(x)
+mean_y <- mean(y)
+# Step 2: Deviations
+dx <- x - mean_x
+dy <- y - mean_y
+# Step 3: Numerator (sum of product of deviations)
+num <- sum(dx * dy)
+# Step 4: Denominator
+den <- sqrt(sum(dx^2) * sum(dy^2))
+# Step 5: Correlation
+cor_xy <- num / den
+cor_xy
+
+3)#a
+# Creating a simple dataframe (same style as Program 1 & Program 2)
+df <- data.frame(
+  id = c(1, 2, 3),
+  name = c("A", "B", "C"),
+  age = c(20, 21, 19)
+)
+print(df)
+#b
+# Structure of dataframe (similar to summary usage from Program 2 & 4)
+str(df)
+# Descriptive statistics
+summary(df)
+# Add a new row (using rbind as in Program 1)
+df2 <- rbind(df, c(4, "D", 22))
+df2
+# Add a new column (using cbind like Program 1)
+df3 <- cbind(df2, marks = c(90, 85, 88, 92))
+df3
+#c
+data(iris)
+# Use only numeric columns for K-means
+iris_data <- iris[, 1:4]
+# Build k-means model with 3 clusters
+set.seed(101)
+km <- kmeans(iris_data, centers = 3)
+# Print cluster centers
+km$centers
+# Optional: check how clusters match species
+table(km$cluster, iris$Species)
+
+
+4)#a
+# Function to print Fibonacci series
+fib <- function(n) {
+  a <- 0
+  b <- 1
+  print(a)
+  print(b)
+  for(i in 3:n){
+    c <- a + b
+    print(c)
+    a <- b
+    b <- c }}
+# Call the function
+fib(10)    # prints first 10 Fibonacci numbers
+
+
+
+#b
+# Sample dataframe
+df <- data.frame(
+  id = 1:6,
+  age = c(21, 23, 19, 25, 20, 22),
+  marks = c(80, 75, 90, 85, 70, 95),
+  gender = c("M","F","F","M","F","M"))
+# Subsetting
+subset(df, age > 21)
+subset(df, gender == "F")
+subset(df, marks >= 80 & gender == "M")
+# Aggregation (same style as summary, mean, etc. from your programs)
+mean(df$marks)
+sum(df$marks)
+min(df$marks)
+max(df$marks)
+# Aggregate by gender
+aggregate(marks ~ gender, data = df, FUN = mean)
+aggregate(age ~ gender, data = df, FUN = max)
+#c
+internal <- c(15,23,18,23,24,22,22,19,19,16,24,11,24,16,23)
+external <- c(49,63,58,60,58,61,60,63,60,52,62,30,59,49,68)
+df <- data.frame(internal, external)
+df
+model <- lm(external ~ internal, data = df)
+summary(model)
+model$coefficients      # slope and intercept
+model$residuals         # residual values
+plot(df$internal, df$external,
+     col = "blue", pch = 16,
+     xlab = "Internal Marks",
+     ylab = "External Marks",
+     main = "Linear Regression Plot")
+abline(model, col = "red", lwd = 2)
+
+
+5)#a
+# Creating R objects for calculator inputs
+a <- 20
+b <- 5
+add_result <- a + b
+sub_result <- a - b
+mul_result <- a * b
+div_result <- a / b
+# Display results
+print(add_result)
+print(sub_result)
+print(mul_result)
+print(div_result)
+#b
+data_csv <- read.csv("C:/Users/YourName/Desktop/sample.csv")
+print(data_csv)
+write.csv(data_csv, "C:/Users/YourName/Desktop/output.csv",
+          row.names = FALSE)
+data_txt <- read.table("C:/Users/YourName/Desktop/sample.txt")
+print(data_txt)
+write.table(data_txt, "C:/Users/YourName/Desktop/output.txt",
+            row.names = FALSE)
+#c
+# Load dataset
+data(mtcars)
+# Use only numeric columns
+mt <- mtcars
+# Apply k-means with 3 clusters
+set.seed(101)
+km <- kmeans(mt, centers = 3)
+# Show cluster centers
+km$centers
+km$cluster
+
+
+6)#a
+df <- data.frame(
+  millage = c(18,25,50,68,75,65),
+  age = c(1,2,2,3,4,5),
+  price = c(29,25,21,18,15,15)
+)
+df
+# Build Multiple Linear Regression Model
+model <- lm(price ~ millage + age, data = df)
+# Model Summary (Regression coefficients)
+summary(model)
+test_car <- data.frame(millage = 40, age = 3)
+predicted_price <- predict(model, test_car)
+predicted_price
+#b
+csv_data <- read.csv("C:/Users/YourName/Desktop/sample.csv")
+print(csv_data)
+write.csv(csv_data, "C:/Users/YourName/Desktop/output.csv",
+          row.names = FALSE)
+txt_data <- read.table("C:/Users/YourName/Desktop/sample.txt")
+print(txt_data)
+write.table(txt_data, "C:/Users/YourName/Desktop/output.txt",
+            row.names = FALSE)
+#c
+day_num <- 4   # Example input
+day <- switch(day_num,
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday")
+print(day)
+
+7)#a
+# Given data
+internal <- c(15,23,18,23,24,22,22,19,19,16,24,11,24,16,23)
+external <- c(49,63,58,60,58,61,60,63,60,52,62,30,59,49,68)
+# Create dataframe
+df <- data.frame(internal, external)
+df
+# Build linear regression model
+model <- lm(external ~ internal, data = df)
+# Show regression coefficients
+model$coefficients
+# Show residuals
+model$residuals
+# Plot the regression model
+plot(df$internal, df$external,
+     col = "blue", pch = 16,
+     xlab = "Internal Marks",
+     ylab = "External Marks",
+     main = "Linear Regression Plot")
+abline(model, col = "red", lwd = 2)
+#b
+# Given data
+x <- c(10,30,70)
+y <- c(25,65,85)
+# Step 1: Means
+mean_x <- mean(x)
+mean_y <- mean(y)
+# Step 2: Deviations
+dx <- x - mean_x
+dy <- y - mean_y
+# Step 3: Numerator
+num <- sum(dx * dy)
+# Step 4: Denominator
+den <- sqrt(sum(dx^2) * sum(dy^2))
+cor_xy <- num / den
+cor_xy
+plot(x, y,
+     col = "blue", pch = 16,
+     xlab = "X Values",
+     ylab = "Y Values",
+     main = "Correlation Plot")
+# Add regression line
+abline(lm(y ~ x), col = "red", lwd = 2)
+#c
+library(XML)
+library(methods)
+# Read XML file
+xml_data <- xmlParse(file = "C:/Users/YourName/Desktop/sample.xml")
+print(xml_data)
+# Convert XML to dataframe
+df_xml <- xmlToDataFrame("C:/Users/YourName/Desktop/sample.xml")
+df_xml
+
+
+8)#a
+age <- c(1,2,2,3,4,5)
+price <- c(29,25,21,18,15,15)
+df <- data.frame(age, price)
+df
+mx <- mean(df$age)
+my <- mean(df$price)
+dx <- df$age - mx
+dy <- df$price - my
+b1 <- sum(dx * dy) / sum(dx^2)
+b0 <- my - b1 * mx
+b0
+b1
+age_input <- 3
+predicted_price <- b0 + b1 * age_input
+predicted_price
+plot(df$age, df$price,
+     col = "blue", pch = 16,
+     xlab = "Age",
+     ylab = "Price",
+     main = "Manual Linear Regression Line")
+# Add line using manual slope + intercept
+abline(a = b0, b = b1, col = "red", lwd = 2)
+#b
+# Sample dataset
+df <- data.frame(
+  id = 1:6,
+  age = c(21,23,19,25,20,22),
+  marks = c(80,75,90,85,70,95),
+  gender = c("M","F","F","M","F","M")
+)
+# Filter (same idea as subset in Program 2)
+subset(df, age > 21)
+subset(df, gender == "F")
+subset(df, marks >= 80)
+# Arrange (sort)
+df[order(df$age), ]
+df[order(-df$marks), ]
+# Select specific columns
+df[, c("age", "marks")]
+df[, 1:2]
+# Summaries (mean, min, max, etc.)
+mean(df$marks)
+sum(df$marks)
+max(df$age)
+min(df$age)
+# Group-wise summary (same concept as aggregate)
+aggregate(marks ~ gender, data = df, FUN = mean)
+#c
+data(iris)
+# ANCOVA model: Petal.Length explained by Sepal.Length + Species
+ancova_model <- aov(Petal.Length ~ Sepal.Length + Species, data = iris)
+summary(ancova_model)
+
+9)#a
+# Load mtcars dataset
+data(mtcars)
+boxplot(mtcars$mpg,
+        main = "Boxplot of MPG",
+        col = "orange",
+        ylab = "MPG")
+# Identify outliers
+out_mpg <- boxplot(mtcars$mpg)$out
+out_mpg   # print the outliers
+boxplot(mtcars$hp,
+        main = "Boxplot of HP",
+        col = "green",
+        ylab = "Horsepower")
+out_hp <- boxplot(mtcars$hp)$out
+out_h
+plot(mtcars$mpg, mtcars$hp,
+     col = "blue", pch = 16,
+     xlab = "MPG", ylab = "HP",
+     main = "Scatter Plot MPG vs HP")
+# Highlight outliers in scatter (in red)
+points(
+  mtcars$mpg[mtcars$mpg %in% out_mpg],
+  mtcars$hp[mtcars$mpg %in% out_mpg],
+  col = "red", pch = 19, cex = 1.4
+)
+#b
+# Import from web
+url <- "http://stats.idre.ucla.edu/stat/data/binary.csv"
+mydata <- read.csv(url)
+mydata
+head(mydata)
+str(mydata)
+# Convert rank to factor (as in Program 6)
+mydata$rank <- factor(mydata$rank)
+# Logistic regression model
+model <- glm(admit ~ gre + gpa + rank,
+             data = mydata,
+             family = binomial())
+summary(model)
+#c
+# Basic string
+s <- "Data Science Lab"
+# nchar() - number of characters
+nchar(s)
+# substr() - extract part of string
+substr(s, 1, 4)
+# paste() - combining strings
+paste("Hello", "World")
+# toupper() and tolower()
+toupper(s)
+tolower(s)
+# strsplit() - split a string
+strsplit(s, " ")
+# grep() - find matching pattern
+grep("Science", s)
+# sub() and gsub() - replace text
+sub("Science", "Analytics", s)
+gsub("a", "A", s)
+
+10)#a
+rain <- c(121.2, 152.6, 98.4, 171, 85.6)
+umb <- c(52, 72, 40, 100, 34)
+df <- data.frame(rain, umb)
+df
+# Means
+mx <- mean(df$rain)
+my <- mean(df$umb)
+# Deviations
+dx <- df$rain - mx
+dy <- df$umb - my
+# Slope
+b1 <- sum(dx * dy) / sum(dx^2)
+# Intercept
+b0 <- my - b1 * mx
+b0
+b1
+rain_input <- 134.3
+predicted_umbrellas <- b0 + b1 * rain_input
+predicted_umbrellas
+plot(df$rain, df$umb,
+     col = "blue", pch = 16,
+     xlab = "Rainfall (mm)",
+     ylab = "Umbrellas Sold",
+     main = "Manual Linear Regression Line")
+abline(a = b0, b = b1, col = "red", lwd = 2)
+#b
+# break example
+for(i in 1:10){
+  if(i == 5){
+    break      # stops the loop
+  }
+  print(i)
+}
+# continue (next) example
+for(i in 1:10){
+  if(i %% 2 == 0){
+    next       # skips even numbers
+  }
+  print(i)
+}
+#c
+# Different objects
+a <- 20
+b <- "hello"
+c <- TRUE
+d <- 5.6
+# Check types
+class(a)
+class(b)
+class(c)
+class(d)
+# Check if a variable is numeric, character, etc.
+is.numeric(a)
+is.character(b)
+is.logical(c)
+# Type conversion
+x <- "123"
+x_num <- as.numeric(x)
+x_num
+y <- 45
+y_char <- as.character(y)
+y_char
+z <- c(1,0,1)
+z_logical <- as.logical(z)
+z_logical
+
+11)#a
+A <- c(200, 220, 250)
+B <- c(180, 190, 185)
+C <- c(240, 230, 260)
+all_values <- c(A, B, C)
+group <- c(rep("A",3), rep("B",3), rep("C",3))
+overall_mean <- mean(all_values)
+overall_mean
+mean_A <- mean(A)
+mean_B <- mean(B)
+mean_C <- mean(C)
+mean_A; mean_B; mean_C
+SSB <- 3*(mean_A - overall_mean)^2 +
+  3*(mean_B - overall_mean)^2 +
+  3*(mean_C - overall_mean)^2
+SSB
+SSW <- sum((A - mean_A)^2) +
+  sum((B - mean_B)^2) +
+  sum((C - mean_C)^2)
+SSW
+df_between <- 3 - 1
+df_within  <- 9 - 3
+MSB <- SSB / df_between
+MSW <- SSW / df_within
+F_value <- MSB / MSW
+F_value
+#b
+hist(iris$Sepal.Length,
+     col = "green",
+     main = "Histogram of Sepal Length",
+     xlab = "Sepal Length",
+     border = "black")
+species_count <- table(iris$Species)
+barplot(species_count,
+        col = c("red","yellow","blue"),
+        main = "Bar Chart of Species",
+        ylab = "Count")
+pie(species_count,
+    col = c("red","yellow","blue"),
+    main = "Pie Chart of Species Distribution")
+#c
+library(rvest)
+# URL to scrape
+link <- "https://en.wikipedia.org/wiki/List_of_countries_by_population"
+# Read HTML
+page <- read_html(link)
+# Extract tables
+all_tables <- page %>% html_table(fill = TRUE)
+# Print first table
+table1 <- all_tables[[1]]
+table1
+
+12)#a
+# Load cars dataset
+data(cars)
+cars
+# Boxplot of speed
+boxplot(cars$speed,
+        col = "orange",
+        main = "Boxplot of Speed",
+        ylab = "Speed")
+# Scatter plot (speed vs distance)
+plot(cars$speed, cars$dist,
+     col = "blue", pch = 16,
+     main = "Scatter Plot: Speed vs Distance",
+     xlab = "Speed",
+     ylab = "Distance")
+# Histogram of distance
+hist(cars$dist,
+     col = "green",
+     main = "Histogram of Distance",
+     xlab = "Distance",
+     border = "red")
+#b
+# Create a list
+mylist <- list(
+  name = "R Programming",
+  numbers = c(10, 20, 30),
+  flag = TRUE
+)
+# Print the list
+print(mylist)
+# Access elements
+mylist$name
+mylist$numbers
+mylist$flag
+# Update element
+mylist$name <- "Data Science"
+# Add new element
+mylist$new_value <- 99
+# Remove element
+mylist$flag <- NULL
+# Length of list
+length(mylist)
+# Combine two lists
+list2 <- list(a = 100, b = 200)
+combined <- c(mylist, list2)
+combined
+#c
+# Install library (run once)
+# install.packages("e1071")
+library(e1071)
+# Load iris dataset
+data(iris)
+# Build Naive Bayes model
+model_nb <- naiveBayes(Species ~ ., data = iris)
+# View model
+model_nb
+# Predict using the model
+pred <- predict(model_nb, iris[,1:4])
+# Compare actual vs predicted
+table(Predicted = pred, Actual = iris$Species)
+
+13)#a
+ages <- c(20,20,20,20,20,20,
+          21,21,21,21,
+          22,22,22,
+          23,23,23,23,
+          24,24,
+          65)
+mean_age <- mean(ages)
+median_age <- median(ages)
+# Mode function (simple beginner-friendly)
+get_mode <- function(v){
+  uniq <- unique(v)
+  uniq[which.max(tabulate(match(v, uniq)))]
+}
+mode_age <- get_mode(ages)
+mean_age
+median_age
+mode_age
+outlier_values <- boxplot(ages)$out
+outlier_values
+hist(ages,
+     col = "lightblue",
+     main = "Age Distribution with Mean/Median/Mode",
+     xlab = "Ages")
+abline(v = mean_age, col = "red", lwd = 2)
+abline(v = median_age, col = "blue", lwd = 2)
+abline(v = mode_age, col = "green", lwd = 2)
+ages2 <- ages[ages != 65]
+mean_age2 <- mean(ages2)
+median_age2 <- median(ages2)
+mode_age2 <- get_mode(ages2)
+mean_age2
+median_age2
+mode_age2
+#b
+X = 4 5 6 7 8 9
+Y =17 18 19 20 21 22
+x <- c(4,5,6,7,8,9)
+y <- c(17,18,19,20,21,22)
+mx <- mean(x)
+my <- mean(y)
+dx <- x - mx
+dy <- y - my
+b1 <- sum(dx * dy) / sum(dx^2)
+b0 <- my - b1 * mx
+b0
+b1
+#c
+# Inputs
+a <- 20
+b <- 5
+# Calculator operations
+add <- a + b
+sub <- a - b
+mul <- a * b
+div <- a / b
+print(add)
+print(sub)
+print(mul)
+print(div)
+
+14)#a
+salary <- c(30,32,110,65,55,50,55,48,43,42,
+            45,45,33,34,38,38,34,38,33,32)
+minimum <- min(salary)
+q1 <- quantile(salary, 0.25)
+median_sal <- median(salary)
+q3 <- quantile(salary, 0.75)
+maximum <- max(salary)
+minimum
+q1
+median_sal
+q3
+maximum
+range_val <- max(salary) - min(salary)
+range_val
+IQR_val <- q3 - q1
+IQR_val
+SIQR <- IQR_val / 2
+SIQR
+lower_fence <- q1 - 1.5 * IQR_val
+upper_fence <- q3 + 1.5 * IQR_val
+outliers <- salary[salary < lower_fence | salary > upper_fence]
+outliers
+boxplot(salary,
+        main = "Boxplot of Employee Salaries",
+        col = "orange",
+        ylab = "Salary")
+#b
+library(readxl)
+excel_data <- read_excel("C:/Users/YourName/Desktop/sample.xlsx")
+excel_data
+library(XML)
+library(methods)
+xml_data <- xmlParse(file = "C:/Users/YourName/Desktop/sample.xml")
+print(xml_data)
+xml_df <- xmlToDataFrame("C:/Users/YourName/Desktop/sample.xml")
+xml_df
+#c
+# Create a list
+mylist <- list(
+  name = "Employee Data",
+  numbers = c(10, 20, 30),
+  flag = TRUE,
+  dept = "HR"
+)
+# Print
+print(mylist)
+# Access elements
+mylist$name
+mylist$numbers
+mylist$dept
+# Modify element
+mylist$dept <- "Finance"
+# Add new element
+mylist$bonus <- 5000
+# Remove element
+mylist$flag <- NULL
+# Length of list
+length(mylist)
+# Merging two lists
+list2 <- list(x = 100, y = 200)
+combined_list <- c(mylist, list2)
+combined_list
+
+15)#a
+library(class)
+df <- data.frame(
+  Age = c(32,40,16,34,34,40,20,15,55,15),
+  Gender = c(0,0,1,1,0,0,1,0,1,0),
+  Sport = c("Football","Neither","Cricket","Cricket","Neither",
+            "Cricket","Neither","Cricket","Football","Football")
+)
+df
+df$Sport <- factor(df$Sport)
+x_train <- df[1:8, 1:2]
+y_train <- df[1:8, 3]
+x_test <- df[9:10, 1:2]
+y_test <- df[9:10, 3]
+pred <- knn(train = x_train, test = x_test, cl = y_train, k = 3)
+pred
+accuracy <- mean(pred == y_test)
+accuracy
+new_person <- data.frame(Age = 25, Gender = 0)
+predicted_sport <- knn(train = x_train, test = new_person, cl = y_train, k = 3)
+predicted_sport
+
+#b
+library(dplyr)
+library(tidyr)
+# Sample dataset
+df <- data.frame(
+  name = c("A","B","C","D","A"),
+  marks1 = c(80,70,90,85,80),
+  marks2 = c(75,65,88,82,75)
+)
+# mutate() – create new column
+df2 <- df %>% mutate(total = marks1 + marks2)
+df2
+# pivot_longer() – convert wide to long
+long_df <- df2 %>% pivot_longer(cols = c(marks1, marks2), 
+                                names_to = "type", values_to = "value")
+long_df
+# pivot_wider() – long to wide
+wide_df <- long_df %>% pivot_wider(names_from = type, values_from = value)
+wide_df
+# Remove missing values
+df_no_na <- na.omit(df2)
+df_no_na
+# Remove duplicates
+df_unique <- df2 %>% distinct()
+df_unique
+#c
+x <- c(10, 20, 30, 40)
+y <- c(5, 15, 25, 35)
+# Correlation
+cor_xy <- cor(x, y)
+cor_xy
+# Covariance
+cov_xy <- cov(x, y)
+cov_xy
