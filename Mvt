@@ -1,0 +1,23 @@
+#include<stdio.h>
+
+int main()
+{
+    int tot, os, n, i, p[20];
+
+    printf("Total memory, OS, no. of processes: ");
+    scanf("%d %d %d", &tot, &os, &n);
+
+    for(i = 0; i < n; i++)
+        scanf("%d", &p[i]);
+
+    tot -= os;
+
+    for(i = 0; i < n; i++)
+        if(tot >= p[i])
+            printf("P%d allocated\n", i+1), tot -= p[i];
+        else
+            printf("P%d blocked\n", i+1);
+
+    printf("External Fragmentation = %d", tot);
+    return 0;
+}
