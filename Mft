@@ -1,0 +1,39 @@
+#include<stdio.h>
+
+int main()
+{
+    int ms, os, n, size, i, p[20], ps[20], intr = 0;
+
+    printf("Memory size: ");
+    scanf("%d", &ms);
+
+    printf("OS size: ");
+    scanf("%d", &os);
+
+    ms -= os;
+
+    printf("No. of partitions: ");
+    scanf("%d", &n);
+
+    size = ms / n;
+    printf("Partition size = %d\n", size);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Process id & size: ");
+        scanf("%d %d", &p[i], &ps[i]);
+
+        if(ps[i] <= size)
+        {
+            intr += size - ps[i];
+            printf("P%d allocated\n", p[i]);
+        }
+        else
+        {
+            printf("P%d blocked\n", p[i]);
+        }
+    }
+
+    printf("Internal Fragmentation = %d", intr);
+    return 0;
+}
